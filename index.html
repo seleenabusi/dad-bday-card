@@ -3,24 +3,23 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Bday Dad!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Georgia&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
-       html, body { 
-    margin: 0; 
-    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-    display: flex; 
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
-    min-height: 100vh; 
-    overflow-x: hidden;
-    overflow-y: auto; /* Allow scrolling */
-    touch-action: manipulation; /* Ensures smooth scrolling on mobile */
-    padding: 20px;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
+        html, body { 
+            margin: 0; 
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow-x: hidden;
+            overflow-y: auto;
+            touch-action: manipulation;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
         #card { 
             position: relative; 
             width: 90vw; 
@@ -49,10 +48,11 @@
         #inside { 
             transform: rotateY(180deg); 
             background: #fff; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
             position: relative; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
         }
         #polaroid { 
             width: 70%; 
@@ -63,6 +63,8 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
             transition: opacity 1.5s, transform 1s; 
             position: absolute; 
+            top: 10%;
+            left: 15%;
         }
         img { 
             width: 100%; 
@@ -79,24 +81,23 @@
             transition: opacity 1.5s; 
         }
         #message { 
-    position: absolute; 
-    top: 20px; 
-    left: 20px; 
-    right: 20px; 
-    bottom: 20px;
-    color: #333; 
-    font-size: 16px; 
-    font-family: 'Georgia', serif;
-    white-space: pre-wrap; 
-    opacity: 0; 
-    transition: opacity 1s; 
-    overflow-y: auto;
-    max-height: 60vh; 
-    padding-right: 10px;
-    line-height: 1.6;
-    word-wrap: break-word; 
-}
-
+            position: relative; 
+            width: 90%; 
+            max-height: 70vh; 
+            color: #333; 
+            font-size: 16px; 
+            font-family: 'Georgia', serif;
+            white-space: pre-wrap; 
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px;
+            box-sizing: border-box;
+            line-height: 1.6;
+            word-wrap: break-word;
+            opacity: 0;
+            transition: opacity 1s;
+            z-index: 5;
+        }
         #cover-text { 
             position: absolute; 
             top: 50%; 
@@ -104,7 +105,7 @@
             transform: translate(-50%, -50%); 
             color: #fff; 
             font-size: 32px; 
-            font-family: 'Georgia', serif;
+            font-family: 'Dancing Script', cursive;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             background: rgba(0,0,0,0.4);
@@ -163,11 +164,14 @@
         // Card opening
         setTimeout(() => document.getElementById("card").classList.add("open"), 3000);
 
-        // Fade image out, letter in
+        // Fade image out, then letter in, then type
         setTimeout(() => {
             document.getElementById("card").classList.add("fade-out");
-            setTimeout(() => document.getElementById("card").classList.add("fade-in"), 1500);
-        }, 7000);
+            setTimeout(() => {
+                document.getElementById("card").classList.add("fade-in");
+                setTimeout(typeWriter, 1500); // Start typing after letter fully fades in
+            }, 1500); // Wait for pic fade-out
+        }, 7000); // Pic stays 7s
 
         // Aesthetic confetti
         function createConfetti() {
@@ -206,7 +210,6 @@
                 setTimeout(typeWriter, 70);
             }
         }
-        setTimeout(typeWriter, 9000);
     </script>
 </body>
 </html>
